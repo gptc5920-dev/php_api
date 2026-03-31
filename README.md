@@ -7,17 +7,17 @@ A lightweight PHP MVC-style REST API for authentication and full users CRUD.
 ```text
 api/
 +-- app/
-¦   +-- Controllers/
-¦   ¦   +-- ApiController.php
-¦   ¦   +-- AuthController.php
-¦   ¦   +-- UserController.php
-¦   +-- Core/
-¦   ¦   +-- Controller.php
-¦   ¦   +-- Database.php
-¦   ¦   +-- Request.php
-¦   ¦   +-- Response.php
-¦   +-- Models/
-¦       +-- User.php
+ï¿½   +-- Controllers/
+ï¿½   ï¿½   +-- ApiController.php
+ï¿½   ï¿½   +-- AuthController.php
+ï¿½   ï¿½   +-- UserController.php
+ï¿½   +-- Core/
+ï¿½   ï¿½   +-- Controller.php
+ï¿½   ï¿½   +-- Database.php
+ï¿½   ï¿½   +-- Request.php
+ï¿½   ï¿½   +-- Response.php
+ï¿½   +-- Models/
+ï¿½       +-- User.php
 +-- bootstrap.php
 +-- config.php
 +-- index.php
@@ -169,9 +169,125 @@ Invoke-RestMethod -Uri "http://localhost/api/users.php?id=1" -Method PUT -Conten
 Invoke-RestMethod -Uri "http://localhost/api/users.php?id=1" -Method DELETE
 ```
 
+
+
+## Postman API Testing
+
+
+
+### 1. Create Environment
+
+In Postman, create an environment (for example `Local API`) with:
+
+- `base_url` = `http://localhost/api`
+- `user_id` = `1` (update this after creating a user)
+
+### 2. Common Request Setup
+
+- Method: choose based on endpoint
+- URL format: `{{base_url}}/users.php` (or other endpoint)
+- Header: `Content-Type: application/json`
+- Body: `raw` -> `JSON`
+
+### 3. Test Flow (Recommended)
+
+1. Register
+- `POST {{base_url}}/register.php`
+- Body:
+
+```json
+{
+  "name": "John Postman",
+  "email": "john.postman@example.com",
+  "password": "secret123",
+  "confirm_password": "secret123",
+  "role": "staff"
+}
+```
+
+2. Login
+- `POST {{base_url}}/login.php`
+- Body:
+
+```json
+{
+  "email": "john.postman@example.com",
+  "password": "secret123"
+}
+```
+
+3. Create User
+- `POST {{base_url}}/users.php`
+- Body:
+
+```json
+{
+  "name": "Jane Postman",
+  "email": "jane.postman@example.com",
+  "password": "secret123",
+  "role": "staff"
+}
+```
+
+4. Get All Users
+- `GET {{base_url}}/users.php`
+
+
+5. Get Single User
+- `GET {{base_url}}/users.php?id={{user_id}}`
+
+6. Update User
+- `PUT {{base_url}}/users.php?id={{user_id}}`
+- Body:
+
+```json
+{
+  "name": "Jane Updated",
+  "role": "admin"
+}
+```
+
+7. Delete User
+- `DELETE {{base_url}}/users.php?id={{user_id}}`
+
+### 4. Optional Postman Tests
+
+Add this in the Tests tab to quickly validate responses:
+
+```javascript
+pm.test("Status code is 2xx", function () {
+  pm.expect(pm.response.code).to.be.within(200, 299);
+});
+
+const json = pm.response.json();
+pm.test("Has API response shape", function () {
+  pm.expect(json).to.have.property("status");
+  pm.expect(json).to.have.property("success");
+  pm.expect(json).to.have.property("message");
+});
+```
+
 ## Notes
 
 - CORS headers are applied globally from `bootstrap.php`.
 - Invalid JSON payloads return `400`.
 
-## Front-End`r`n`r`nThe front-end is API-focused and lives in `front-end/` with these pages:`r`n`r`n- `front-end/index.html` (home)`r`n- `front-end/register.html` (register form)`r`n- `front-end/login.html` (login form)`r`n- `front-end/dashboard.html` (users CRUD)`r`n`r`nAssets:`r`n`r`n- `front-end/css/styles.css``r`n- `front-end/js/app.js``r`n`r`nOpen in browser:`r`n`r`n- `http://localhost/api/front-end/index.html`
+
+## Front-End
+
+The front-end is API-focused and lives in `front-end/` with these pages:
+
+- `front-end/index.html` (home)
+- `front-end/register.html` (register form)
+- `front-end/login.html` (login form)
+- `front-end/dashboard.html` (users CRUD)
+
+Assets:
+
+- `front-end/css/styles.css`
+- `front-end/js/app.js`
+
+
+Open in browser:
+
+- `http://localhost/api/front-end/index.html`

@@ -21,7 +21,7 @@ final class AuthController extends Controller
     }
 
     // POST /login.php
-    public function login(): never
+    public function login(): never //the 'never' return type indicates that a function or method will not return a value to the caller, and it will instead terminate the script execution. 
     {
         // 1) Guard HTTP method first.
         $this->allowMethod('POST');
