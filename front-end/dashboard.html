@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="glow glow-left"></div>
+  <div class="glow glow-right"></div>
+
+  <header class="topbar">
+    <a class="brand" href="./index.html">Clean API</a>
+    <nav>
+      <a href="./index.html">Home</a>
+      <a href="./register.html">Register</a>
+      <a href="./login.html">Login</a>
+      <a href="./dashboard.html" class="active">Dashboard</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="panel reveal">
+      <div class="section-head">
+        <p class="label">Auth Module</p>
+        <h2>Dashboard Access Login</h2>
+        <p class="summary small">Login directly here before using CRUD actions.</p>
+      </div>
+
+      <div class="single-col">
+        <form id="loginForm" class="card">
+          <h3>Login</h3>
+          <input name="email" type="email" placeholder="Email" required />
+          <input name="password" type="password" placeholder="Password" required />
+          <button class="btn primary" type="submit">Login</button>
+          <pre class="result" id="loginResult"></pre>
+        </form>
+      </div>
+    </section>
+
+    <section class="panel reveal">
+      <div class="section-head">
+        <p class="label">Users Module</p>
+        <h2>CRUD Dashboard</h2>
+        <p class="summary small">Create, update, and delete users while monitoring live API responses.</p>
+        <p class="api-hint" id="apiBaseHint"></p>
+      </div>
+
+      <div class="grid-two">
+        <form id="createUserForm" class="card">
+          <h3>Create User</h3>
+          <input name="name" placeholder="Name" required />
+          <input name="email" type="email" placeholder="Email" required />
+          <select name="role">
+            <option value="staff">staff</option>
+            <option value="admin">admin</option>
+          </select>
+          <input name="password" type="password" placeholder="Password" required />
+          <button class="btn primary" type="submit">Create User</button>
+          <pre class="result" id="createUserResult"></pre>
+        </form>
+
+        <form id="updateUserForm" class="card">
+          <h3>Update User</h3>
+          <input name="id" type="number" min="1" placeholder="User ID" required />
+          <input name="name" placeholder="New name (optional)" />
+          <input name="email" type="email" placeholder="New email (optional)" />
+          <select name="role">
+            <option value="">keep current role</option>
+            <option value="staff">staff</option>
+            <option value="admin">admin</option>
+          </select>
+          <input name="password" type="password" placeholder="New password (optional)" />
+          <button class="btn primary" type="submit">Update</button>
+          <pre class="result" id="updateUserResult"></pre>
+        </form>
+      </div>
+
+      <div class="single-col" style="margin-top:16px;">
+        <form id="deleteUserForm" class="card">
+          <h3>Delete User</h3>
+          <input name="id" type="number" min="1" placeholder="User ID" required />
+          <button class="btn danger" type="submit">Delete</button>
+          <pre class="result" id="deleteUserResult"></pre>
+        </form>
+      </div>
+
+      <div class="single-col" style="margin-top:16px;">
+        <form id="viewUserForm" class="card">
+          <h3>View User Profile</h3>
+          <input name="id" type="number" min="1" placeholder="User ID" required />
+          <button class="btn ghost" type="submit">View Profile</button>
+          <pre class="result" id="viewUserResult"></pre>
+        </form>
+
+        <article id="userProfileCard" class="card profile-card" style="margin-top:12px;">
+          <h3>User Profile</h3>
+          <p class="summary small">Select a user ID and click View Profile.</p>
+          <div class="profile-grid">
+            <div><span>ID</span><strong id="profileId">-</strong></div>
+            <div><span>Name</span><strong id="profileName">-</strong></div>
+            <div><span>Email</span><strong id="profileEmail">-</strong></div>
+            <div><span>Role</span><strong id="profileRole">-</strong></div>
+            <div><span>Created</span><strong id="profileCreated">-</strong></div>
+          </div>
+        </article>
+      </div>
+
+      <article class="card table-card">
+        <div class="row-between">
+          <h3>Users List</h3>
+          <button class="btn ghost" id="refreshUsersBtn" type="button">Refresh</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Created</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="usersTableBody">
+              <tr><td colspan="6">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Front-End</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="glow glow-left"></div>
+  <div class="glow glow-right"></div>
+
+  <header class="topbar">
+    <a class="brand" href="./index.html">Clean API</a>
+    <nav>
+      <a href="./index.html" class="active">Home</a>
+      <a href="./register.html">Register</a>
+      <a href="./login.html">Login</a>
+      <a href="./dashboard.html">Dashboard</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero reveal">
+      <p class="label">Frontend + Backend</p>
+      <h1>Single Front-End Matching Your API</h1>
+      <p class="summary">Use the pages below to test your real endpoints for authentication and users CRUD.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="./dashboard.html">Open Dashboard</a>
+        <a class="btn ghost" href="./register.html">Create Account</a>
+      </div>
+      <div class="status-card" id="apiStatus">
+        <strong>API Status</strong>
+        <p>Checking backend...</p>
+      </div>
+    </section>
+
+    <section class="projects reveal">
+      <div class="section-head">
+        <p class="label">Modules</p>
+        <h2>Available Screens</h2>
+      </div>
+      <div class="project-grid">
+        <article>
+          <h3>Register</h3>
+          <p>Create account via `POST /api/register.php`.</p>
+          <a class="btn ghost" href="./register.html">Go</a>
+        </article>
+        <article>
+          <h3>Login</h3>
+          <p>Sign in via `POST /api/login.php`.</p>
+          <a class="btn ghost" href="./login.html">Go</a>
+        </article>
+        <article>
+          <h3>Dashboard</h3>
+          <p>Manage users via `GET/POST/PUT/DELETE /api/users.php`.</p>
+          <a class="btn ghost" href="./dashboard.html">Go</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
